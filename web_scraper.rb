@@ -9,11 +9,13 @@ post '/gateway' do
   all_speakers_list = ["speakers", "list", "of", "all"]
   message = params[:text].gsub(params[:trigger_word], '').strip
 
-  if (message.split(' ') & all_speakers_list).any?
-    respond_message get_speaker_hash
-  else
-    respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
-  end
+  respond_message message
+  
+  # if (message.split(' ') & all_speakers_list).any?
+  #   respond_message get_speaker_hash
+  # else
+  #   respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
+  # end
 
 
   # This is an array - not needed for now

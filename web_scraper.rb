@@ -30,19 +30,18 @@ def get_speaker_hash
   page = HTTParty.get("http://tconf.io", :verify => false)
   parse_page = Nokogiri::HTML(page)
 
-  # speakers, speakers_title = [], []
+  speakers, speakers_title = [], []
 
-  # parse_page.css('.speaker').css('.name').map do |name|
-  #   speaker_name = name.text
-  #   speakers << speaker_name
-  # end
+  parse_page.css('.speaker').css('.name').map do |name|
+    speaker_name = name.text
+    speakers << speaker_name
+  end
 
-  # parse_page.css('.speaker').css('.text-alt').map do |title|
-  #   speaker_title = title.text
-  #   speakers_title << speaker_title
-  # end
+  parse_page.css('.speaker').css('.text-alt').map do |title|
+    speaker_title = title.text
+    speakers_title << speaker_title
+  end
 
-  # # Map speakers with their title and company as a hash
-  # speaker_hash = Hash[speakers.zip(speakers_title)]  
-  parse_page
+  # Map speakers with their title and company as a hash
+  speaker_hash = Hash[speakers.zip(speakers_title)]    
 end

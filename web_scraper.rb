@@ -9,7 +9,7 @@ post '/gateway' do
   message = params[:text].gsub(params[:trigger_word], '').strip
   
   if (message.split(' ') & all_speakers_list).any?
-    respond_message get_speaker_hash
+    respond_message "testing" #get_speaker_hash
   else
     respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
   end

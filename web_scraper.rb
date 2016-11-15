@@ -7,14 +7,12 @@ require 'sinatra'
 post '/gateway' do
   all_speakers_list = ["speakers", "list", "of", "all"]
   message = params[:text].gsub(params[:trigger_word], '').strip
-
-  respond_message message
   
-  # if (message.split(' ') & all_speakers_list).any?
-  #   respond_message get_speaker_hash
-  # else
-  #   respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
-  # end
+  if (message.split(' ') & all_speakers_list).any?
+    respond_message get_speaker_hash
+  else
+    respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
+  end
 
 
   # This is an array - not needed for now
@@ -29,7 +27,6 @@ def respond_message message
 end
 
 def get_speaker_hash
-
   page = HTTParty.get('https://tconf.io', verify: false)
   parse_page = Nokogiri::HTML(page)
 

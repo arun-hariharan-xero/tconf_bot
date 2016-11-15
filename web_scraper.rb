@@ -9,7 +9,7 @@ post '/gateway' do
   message = params[:text].gsub(params[:trigger_word], '').strip
   
   if (message.split(' ') & all_speakers_list).any?
-    respond_message "testing" #get_speaker_hash
+    respond_message get_speaker_hash
   else
     respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
   end
@@ -27,21 +27,22 @@ def respond_message message
 end
 
 def get_speaker_hash
-  page = HTTParty.get('https://tconf.io', verify: false)
-  parse_page = Nokogiri::HTML(page)
+  # page = HTTParty.get('https://tconf.io', verify: false)
+  # parse_page = Nokogiri::HTML(page)
 
-  speakers, speakers_title = [], []
+  # speakers, speakers_title = [], []
 
-  parse_page.css('.speaker').css('.name').map do |name|
-    speaker_name = name.text
-    speakers << speaker_name
-  end
+  # parse_page.css('.speaker').css('.name').map do |name|
+  #   speaker_name = name.text
+  #   speakers << speaker_name
+  # end
 
-  parse_page.css('.speaker').css('.text-alt').map do |title|
-    speaker_title = title.text
-    speakers_title << speaker_title
-  end
+  # parse_page.css('.speaker').css('.text-alt').map do |title|
+  #   speaker_title = title.text
+  #   speakers_title << speaker_title
+  # end
 
-  # Map speakers with their title and company as a hash
-  speaker_hash = Hash[speakers.zip(speakers_title)]
+  # # Map speakers with their title and company as a hash
+  # speaker_hash = Hash[speakers.zip(speakers_title)]
+  "tessss"
 end

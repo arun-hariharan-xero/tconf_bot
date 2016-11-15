@@ -28,7 +28,7 @@ post '/gateway' do
   speaker_hash = Hash[speakers.zip(speakers_title)]
 
   if (message.split(' ') & all_speakers_list).any?
-    respond_message speaker_hash
+    respond_message "testing " #speaker_hash
   else
     respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
   end

@@ -27,7 +27,7 @@ def respond_message message
 end
 
 def get_speaker_hash
-  page = HTTParty.get("https://tconf.io", :verify => false)
+  page = HTTParty.get("https://tconf.io")
   # parse_page = Nokogiri::HTML(page)
 
   # speakers, speakers_title = [], []

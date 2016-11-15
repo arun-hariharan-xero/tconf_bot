@@ -11,12 +11,9 @@ post '/gateway' do
   message = params[:text].gsub(params[:trigger_word], '').strip
   
   if (message.split(' ') & faq_init).any?
-    answer = fetch_faq_answer(message)
-    respond_message answer
+    respond_message fetch_faq_answer(message)
   elsif (message.split(' ') & all_speakers_list).any?
     respond_message get_speaker_hash
-  if (message.split(' ') & schedule_list).any? && (message.split(' ') & all_speakers_list).any?)
-
   else
     respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
   end
@@ -33,6 +30,8 @@ def fetch_faq_answer(message)
   faq_list = ["bathroom", "talks", "location"]
   if message.include? faq_list[0]
     "The bathrooms can be found only in time of urgency. "
+  else
+    "no match found"
   end
 end
 

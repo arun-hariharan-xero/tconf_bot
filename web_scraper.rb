@@ -6,6 +6,7 @@ require 'httparty'
 
 post '/gateway' do
   message = params[:text].gsub(params[:trigger_word], '').strip
+  respond_message "testing "
 
   all_speakers_list = ["speakers", "list", "of", "all"]
 
@@ -27,7 +28,7 @@ post '/gateway' do
   # Map speakers with their title and company as a hash
   speaker_hash = Hash[speakers.zip(speakers_title)]
 
-  respond_message "testing "
+
   if (message.split(' ') & all_speakers_list).any?
     respond_message "testing " #speaker_hash
   else

@@ -3,10 +3,10 @@ require 'json'
 require 'pry'
 require 'csv'
 require 'httparty'
+require 'sinatra'
 
 post '/gateway' do
   message = params[:text].gsub(params[:trigger_word], '').strip
-  respond_message "testing "
 
   all_speakers_list = ["speakers", "list", "of", "all"]
 
@@ -30,7 +30,7 @@ post '/gateway' do
 
 
   if (message.split(' ') & all_speakers_list).any?
-    respond_message "testing " #speaker_hash
+    respond_message speaker_hash
   else
     respond_message "Oops - you just asked a query that is being cooked into the bot-heart. Bad luck Brian!"
   end

@@ -1,7 +1,6 @@
 require 'nokogiri'
 require 'json'
 require 'pry'
-require 'csv'
 require 'httparty'
 require 'sinatra'
 

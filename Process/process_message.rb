@@ -31,7 +31,7 @@ class ProcessMessage
       brains.respond_normal(brains.fetch_compliment)
 
     elsif (message.split(' ') & brains.love).any?
-      brains.respond_normal(brains.fetch_love)
+     puts brains.respond_normal(brains.fetch_love)
 
     elsif (message.split(' ') & brains.snap).any?
       brains.respond_normal(brains.fetch_snap)

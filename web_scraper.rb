@@ -1,5 +1,5 @@
-require_relative 'Process/process_message'
 require_relative 'Dictionaries/keywords'
+require_relative 'Process/process_message'
 require_relative 'Scraper/bot_brains'
 
 require 'nokogiri'

@@ -42,7 +42,7 @@ class ProcessMessage
       response.respond_normal(brains.fetch_compliment)
 
     elsif (message.split(' ') & keywords.love).any?
-     puts response.respond_normal(brains.fetch_love)
+      response.respond_normal(brains.fetch_love)
 
     elsif (message.split(' ') & keywords.snap).any?
       response.respond_normal(brains.fetch_snap)

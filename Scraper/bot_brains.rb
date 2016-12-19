@@ -1,5 +1,5 @@
 require_relative '../Response/responses'
-require_relative '../Dictionaries/keywords'
+require_relative '../Dictionaries/keywords_list'
 
 class BotBrains
 

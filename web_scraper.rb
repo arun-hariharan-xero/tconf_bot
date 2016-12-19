@@ -35,7 +35,7 @@ class Brains
     t_link ||= "https://tconf.io"
     t_url ||= "https://tconf.io/assets/img/backgrounds/bg1.jpg"
     pret ||= ""
-    content_type :json 
+    #content_type :json
     {"attachments" => [{
       "title" => message[0],
       "text" => message[1],
@@ -45,7 +45,7 @@ class Brains
   end
 
   def respond_bathroom
-    content_type :json
+    #content_type :json
     {"attachments" => [{
       "title" => "The toilet is located this way.",
       "image_url" => "https://cdn1.iconfinder.com/data/icons/hands-pt-2/100/097_-_hand_arrow-512.png"
@@ -200,7 +200,7 @@ class Brains
   end
 
   def respond_normal message
-    content_type :json
+    # content_type :json
     {:text => message}.to_json
   end
 

@@ -1,57 +1,42 @@
 require_relative '../Response/responses'
+require_relative '../Process/fetchers'
 require_relative '../Dictionaries/keywords_list'
 
 class ProcessMessage
 
-  attr_reader :response, :keywords, :brains
+  attr_reader :response, :keywords, :brains, :fetcher
 
   def initialize(keywords, brains)
     @response = Responses.new
+    @fetcher = Fetchers.new(keywords)
     @keywords = keywords
     @brains = brains
   end
 
   def process(message)
-
     if (message.split(' ') & keywords.all_speakers_list).any?
       response.respond_message(brains.get_speaker_hash)
 
     elsif (message.split(' ') & keywords.faq_init).any?
-      answer = brains.fetch_faq_answer(message)
-      if answer == "speaker"
-        brains.begin_individual_response(message)
-      elsif answer == []
-         brains.bingo(message)
-      elsif answer == "test"
-        code1 = "My only test case - Guess the language ;) \n```describe '#please_run_i_beg_you' do \n\tcontext 'when bot is running' do\n\t\tit { is_expected.to be_running }\n\tend\nend```"
-        code2 = "I *swear* this is in my code. \nI guess *my master* likes to just *watch the world burn*!!\n```elsif answer == \"question\"\n\trespond_answer(question)\nend```"
-        code = [code1, code2]
-        response.respond_normal(code.sample)
-      elsif answer == "question"
-        response.respond_normal(brains.fetch_question)
-      elsif answer == "bathroom"
-        response.respond_bathroom
-      else
-        response.respond_message(answer)
-      end
+      respond_with_correct_faq(message)
 
     elsif (message.split(' ') & keywords.joke_init).any?
-      response.respond_message(brains.fetch_jokes)
+      response.respond_message(fetcher.fetch_jokes)
 
     elsif (message.split(' ') & keywords.compliment).any? 
-      response.respond_normal(brains.fetch_compliment)
+      response.respond_normal(fetcher.fetch_compliment)
 
     elsif (message.split(' ') & keywords.love).any?
-      response.respond_normal(brains.fetch_love)
+      response.respond_normal(fetcher.fetch_love)
 
     elsif (message.split(' ') & keywords.snap).any?
-      response.respond_normal(brains.fetch_snap)
+      response.respond_normal(fetcher.fetch_snap)
 
     elsif (message.split(' ') & keywords.lol).any?
-      response.respond_normal(brains.fetch_lol)
+      response.respond_normal(fetcher.fetch_lol)
 
     elsif (message.split(' ') & keywords.wishes).any?
-      response.respond_normal(brains.fetch_wishes)
+      response.respond_normal(fetcher.fetch_wishes)
 
     elsif (message.split(' ') & keywords.individual_list_1).any? || (message.split(' ') & keywords.individual_list).any?
       brains.begin_individual_response(message)
@@ -63,7 +48,26 @@ class ProcessMessage
     else
       brains.bingo(message)
     end
+  end
 
+  def respond_with_correct_faq(message)
+    answer = fetcher.fetch_faq_answer(message)
+    if answer == "speaker"
+      brains.begin_individual_response(message)
+    elsif answer == []
+       brains.bingo(message)
+    elsif answer == "test"
+      code1 = "My only test case - Guess the language ;) \n```describe '#please_run_i_beg_you' do \n\tcontext 'when bot is running' do\n\t\tit { is_expected.to be_running }\n\tend\nend```"
+      code2 = "I *swear* this is in my code. \nI guess *my master* likes to just *watch the world burn*!!\n```elsif answer == \"question\"\n\trespond_answer(question)\nend```"
+      code = [code1, code2]
+      response.respond_normal(code.sample)
+    elsif answer == "question"
+      response.respond_normal(fetcher.fetch_question)
+    elsif answer == "bathroom"
+      response.respond_bathroom
+    else
+      response.respond_message(answer)
+    end
   end
 
 end

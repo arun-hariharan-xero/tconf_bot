@@ -6,6 +6,8 @@ class BotBrains
   attr_accessor :snap, :lol, :wishes, :schedule, :schedule_list, :individual_list
   attr_accessor :individual_list_1, :names, :speech, :individual_speech, :individual_image
 
+  attr_reader :response
+
   def initialize 
     @all_speakers_list = ["speakers", "list", "all"]
     @faq_init = ["where", "what", "how", "what's", "whats", "which", "secret", "language", "where's", "how", "lunch", "do", "show", "drinks", "about", "getting", "get", "parking"]
@@ -19,7 +21,7 @@ class BotBrains
     @individual_list = ["Norman", "Stephen", "Scott", "Owen", "Adam", "Rob", "Harini", "Mike", "Ray", "Matt", "Aditya"]
     @individual_list_1 = ["Noble", "Jackel", "Clements", "Yan", "Larter", "Manger","Rao", "Jeffcott", "Hua", "Fellows", "Kalra"]
 
-    response = Responses.new
+    @response = Responses.new
   end
 
   def begin_individual_response(message)

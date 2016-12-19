@@ -1,3 +1,5 @@
+require_relative '../Response/responses'
+
 class BotBrains
 
   attr_accessor :all_speakers_list, :faq_init, :joke_init, :compliment, :love
@@ -16,33 +18,18 @@ class BotBrains
     @schedule_list = ["shcedule","schedule", "speech", "contents", "content", "schedule?", "speaking"]
     @individual_list = ["Norman", "Stephen", "Scott", "Owen", "Adam", "Rob", "Harini", "Mike", "Ray", "Matt", "Aditya"]
     @individual_list_1 = ["Noble", "Jackel", "Clements", "Yan", "Larter", "Manger","Rao", "Jeffcott", "Hua", "Fellows", "Kalra"]
+
+    response = Responses.new
   end
 
   def begin_individual_response(message)
     process_schedule_data
     full_name = fetch_ind_data(message)
     final_data = fetch_detailed_speaker_info(full_name)
-    respond_message(final_data[0..1], "https://tconf.io", "", final_data[2])
+    response.respond_message(final_data[0..1], "https://tconf.io", "", final_data[2])
   end
 
-  def respond_message(message, t_link = false, pret = false, t_url = false)  
-    t_link ||= "https://tconf.io"
-    t_url ||= "https://tconf.io/assets/img/backgrounds/bg1.jpg"
-    pret ||= ""
-    {"attachments" => [{
-      "title" => message[0],
-      "text" => message[1],
-      "title_link" => t_link,
-      "thumb_url" => t_url,
-      "pretext" => pret}]}.to_json
-  end
-
-  def respond_bathroom
-    {"attachments" => [{
-      "title" => "The toilet is located this way.",
-      "image_url" => "https://cdn1.iconfinder.com/data/icons/hands-pt-2/100/097_-_hand_arrow-512.png"
-      }]}.to_json
-  end
+  
 
   def fetch_ind_data(message)
     full_name = ""
@@ -158,7 +145,7 @@ class BotBrains
   def bingo(message)
     answer = get_answer_from_bing(message)
     pretext = "Oops - you just asked a query that is being cooked into the bot-heart. \nMeanwhile, here is a link that might answer your burning question!!"
-    respond_message(answer[0], answer[1], pretext)
+    response.respond_message(answer[0], answer[1], pretext)
   end
 
   def get_answer_from_bing(message)
@@ -190,11 +177,6 @@ class BotBrains
 
     ["From the land of botnet", jokes_list.sample]
   end
-
-  def respond_normal message    
-    {:text => message}.to_json
-  end
-
 
   def get_speaker_hash
     page = HTTParty.get("http://tconf.io", :verify => false)

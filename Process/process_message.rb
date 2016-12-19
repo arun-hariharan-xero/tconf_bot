@@ -1,19 +1,22 @@
 require_relative '../Response/responses'
+require_relative '.././Dictionaries/keywords'
 
 class ProcessMessage
 
-  attr_reader :response
-  
-  def initialize
+  attr_reader :response, :keywords, :brains
+
+  def initialize(keywords, brains)
     @response = Responses.new
+    @keywords = keywords
+    @brains = brains
   end
 
-  def process(message, brains)
+  def process(message)
 
-    if (message.split(' ') & brains.all_speakers_list).any?
+    if (message.split(' ') & keywords.all_speakers_list).any?
       response.respond_message(brains.get_speaker_hash)
 
-    elsif (message.split(' ') & brains.faq_init).any?
+    elsif (message.split(' ') & keywords.faq_init).any?
       answer = brains.fetch_faq_answer(message)
       if answer == "speaker"
         brains.begin_individual_response(message)
@@ -32,28 +35,28 @@ class ProcessMessage
         response.respond_message(answer)
       end
 
-    elsif (message.split(' ') & brains.joke_init).any?
+    elsif (message.split(' ') & keywords.joke_init).any?
       response.respond_message(brains.fetch_jokes)
 
-    elsif (message.split(' ') & brains.compliment).any? 
+    elsif (message.split(' ') & keywords.compliment).any? 
       response.respond_normal(brains.fetch_compliment)
 
-    elsif (message.split(' ') & brains.love).any?
+    elsif (message.split(' ') & keywords.love).any?
      puts response.respond_normal(brains.fetch_love)
 
-    elsif (message.split(' ') & brains.snap).any?
+    elsif (message.split(' ') & keywords.snap).any?
       response.respond_normal(brains.fetch_snap)
 
-    elsif (message.split(' ') & brains.lol).any?
+    elsif (message.split(' ') & keywords.lol).any?
       response.respond_normal(brains.fetch_lol)
 
-    elsif (message.split(' ') & brains.wishes).any?
+    elsif (message.split(' ') & keywords.wishes).any?
       response.respond_normal(brains.fetch_wishes)
 
-    elsif (message.split(' ') & brains.individual_list_1).any? || (message.split(' ') & brains.individual_list).any?
+    elsif (message.split(' ') & keywords.individual_list_1).any? || (message.split(' ') & keywords.individual_list).any?
       brains.begin_individual_response(message)
 
-    elsif (message.split(' ') & brains.schedule_list).any?
+    elsif (message.split(' ') & keywords.schedule_list).any?
       brains.process_schedule_data
       response.respond_message(["The Schedule for the day:", brains.final_schedule.join("\n")])  
 

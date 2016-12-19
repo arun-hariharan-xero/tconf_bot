@@ -1,27 +1,13 @@
 require_relative '../Response/responses'
+require_relative '.././Dictionaries/keywords'
 
 class BotBrains
 
-  attr_accessor :all_speakers_list, :faq_init, :joke_init, :compliment, :love
-  attr_accessor :snap, :lol, :wishes, :schedule, :schedule_list, :individual_list
-  attr_accessor :individual_list_1, :names, :speech, :individual_speech, :individual_image
-
-  attr_reader :response
+  attr_reader :response, :keywords, :names, :speech, :individual_speech, :individual_image
 
   def initialize 
-    @all_speakers_list = ["speakers", "list", "all"]
-    @faq_init = ["where", "what", "how", "what's", "whats", "which", "secret", "language", "where's", "how", "lunch", "do", "show", "drinks", "about", "getting", "get", "parking"]
-    @joke_init = ["joke", "jokes", "joke!"]
-    @compliment = ["awesome", "thanks", "thank", "sick", "amazing", "amazing!", "awesome!", "thanks!"]
-    @love = ["love you", "love", "marry"]
-    @snap = ["hate", "hate", "dumb", "stupid", "idiot", "mean", "shut", "shit"]
-    @lol = ["lol", "LOL", "rofl", "ROFL", "lmao", "LMAO"]
-    @wishes = ["goodnight", "good morning", "good afternoon", "Goodnight", "Good morning", "morning"]
-    @schedule_list = ["shcedule","schedule", "speech", "contents", "content", "schedule?", "speaking"]
-    @individual_list = ["Norman", "Stephen", "Scott", "Owen", "Adam", "Rob", "Harini", "Mike", "Ray", "Matt", "Aditya"]
-    @individual_list_1 = ["Noble", "Jackel", "Clements", "Yan", "Larter", "Manger","Rao", "Jeffcott", "Hua", "Fellows", "Kalra"]
-
     @response = Responses.new
+    @keywords = Keywords.new
   end
 
   def begin_individual_response(message)
@@ -31,17 +17,15 @@ class BotBrains
     response.respond_message(final_data[0..1], "https://tconf.io", "", final_data[2])
   end
 
-  
-
   def fetch_ind_data(message)
     full_name = ""
     message.split(' ').each_with_index do |msg, ind|
-      if (@individual_list_1.include? msg.capitalize) 
-        new_ind = @individual_list_1.index(msg)
-        full_name = @names[new_ind]
-      elsif (@individual_list.include? msg.capitalize) 
-        new_ind = @individual_list.index(msg)
-        full_name = @names[new_ind]
+      if (keywords.individual_list_1.include? msg.capitalize) 
+        new_ind = keywords.individual_list_1.index(msg)
+        full_name = names[new_ind]
+      elsif (keywords.individual_list.include? msg.capitalize) 
+        new_ind = keywords.individual_list.index(msg)
+        full_name = names[new_ind]
       end
     end
     full_name
@@ -49,14 +33,14 @@ class BotBrains
 
   def fetch_detailed_speaker_info(full_name)
     full_speaker_data = []
-    @individual_speech.each do |key, value|
+    keywords.individual_speech.each do |key, value|
       if key == full_name
         full_speaker_data << key
         full_speaker_data << value
       end
     end
 
-    @individual_image.each do |key, value|
+    keywords.individual_image.each do |key, value|
       if key == full_name
         full_speaker_data << value
       end
@@ -113,31 +97,21 @@ class BotBrains
   end
 
   def fetch_faq_answer(message)
-    transport_list = ["transport", "car", "park", "parking", "arrive", "reach", "travel", "get", "getting"]
-    faq_list= ["when", "location", "When", "Location", "address", "Address", "event", "conference", "time"]
-    bathroom_list = ["bathroom", "bathrooms", "restroom", "toilet", "toilets", "toilets?", "toilet?", "bathroom?", "bathrooms?"]
-
-    food_list = ["lunch", "lunch?", "food", "food?"]
-    drinks_list = [ "drinks", "drinks?", "coffee", "coffee?", "water", "water?"]
-    test_list = ["test", "sample", "test?", "tested", "tested?", "tests?", "tests", "code", "language"]
-
-    questions = ["girlfriend", "girlfriend?", "love?", "coded", "alone", "single", "secret", "special", "secret?"]
-
-    if (message.split(' ') & transport_list).any?
+    if (message.split(' ') & keywords.transport_list).any?
       get_location_faq("transport/parking")
-    elsif (message.split(' ') & faq_list).any?
+    elsif (message.split(' ') & keywords.faq_list).any?
       get_location_faq("when and")
-    elsif (message.split(' ') & bathroom_list).any?
+    elsif (message.split(' ') & keywords.bathroom_list).any?
       "bathroom"
-    elsif (message.split(' ') & food_list).any?
+    elsif (message.split(' ') & keywords.food_list).any?
       ["Yummy lunch menu - Just for you", "We have got some amazing Sandwiches and Wraps - best in town.\nAlso I know you are going to ask about drinks next, so I am preparing to answer that too ;)"]
-    elsif (message.split(' ') & drinks_list).any?
+    elsif (message.split(' ') & keywords.drinks_list).any?
       ["Liquid for stomach, Energy for Soul", "Tea, Coffee and Water - We have got them all covered for you."]
-    elsif (message.split(' ') & @individual_list_1).any? || (message.split(' ') & @individual_list).any?
+    elsif (message.split(' ') & keywords.individual_list_1).any? || (message.split(' ') & keywords.individual_list).any?
       "speaker"
-    elsif (message.split(' ') & test_list).any?
+    elsif (message.split(' ') & keywords.test_list).any?
       "test"
-    elsif (message.split(' ') & questions).any?
+    elsif (message.split(' ') & keywords.questions).any?
       "question"
     else
       []

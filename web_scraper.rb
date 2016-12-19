@@ -1,19 +1,23 @@
-require_relative 'Scraper/bot_brains'
 require_relative 'Process/process_message'
+require_relative 'Dictionaries/keywords'
+require_relative 'Scraper/bot_brains'
 
 require 'nokogiri'
 require 'json'
 require 'pry'
 require 'httparty'
 require 'sinatra'
+require 'logger'
 
 post '/gateway' do
+  keywords = Keywords.new
   brains = BotBrains.new
-  process_message = ProcessMessage.new
+  process_message = ProcessMessage.new(keywords, brains)
 
-  puts params
+  logger = Logger.new(STDERR)
+  logger.info(params)
 
   message = params[:text].gsub(params[:trigger_word], '').strip
-  process_message.process(message, brains)
+  process_message.process(message)
   #Pry.start(binding)  
 end

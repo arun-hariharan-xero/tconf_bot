@@ -17,7 +17,7 @@ describe 'Fetchers' do
     let(:msg_proc) { MessageProcessor.new(@keywords, brains) }
 
     it 'processes the msessage correctly' do 
-      msg_proc.process("what is Norman speaking")
+      msg_proc.process("are you still chigging along mate?")
     end
   end
 end

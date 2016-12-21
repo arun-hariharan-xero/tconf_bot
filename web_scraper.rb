@@ -27,5 +27,5 @@ end
   # brains = BotBrains.new(keywords)
   # process_message = MessageProcessor.new(keywords, brains)
 
-  # message = "I love you"
+  # message = "are you still chigging along mate?"
   # process_message.process(message)

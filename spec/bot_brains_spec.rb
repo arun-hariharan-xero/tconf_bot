@@ -16,7 +16,7 @@ describe 'BotBrains' do
     let(:brains) { BotBrains.new(@keywords) }
 
     it 'processes the msessage correctly' do 
-      puts brains.bing_answer_for("HTC 10 Nougat update for Australia")
+      brains.bing_answer_for("HTC 10?")
     end
   end
 end

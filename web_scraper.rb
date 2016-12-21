@@ -1,5 +1,4 @@
-require_relative 'Dictionaries/keywords_list'
-require_relative 'Process/process_message'
+require_relative 'Processors/message_processor'
 require_relative 'Scraper/bot_brains'
 
 require 'nokogiri'
@@ -10,9 +9,10 @@ require 'sinatra'
 require 'logger'
 
 post '/gateway' do
-  keywords = Keywords.new
-  brains = BotBrains.new
-  process_message = ProcessMessage.new(keywords, brains)
+  keywords_json = File.read(File.expand_path("./Dictionaries/keywords_prebuilt.json"))
+  keywords = JSON.parse(keywords_json)
+  brains = BotBrains.new(keywords)
+  process_message = MessageProcessor.new(keywords, brains)
 
   logger = Logger.new(STDERR)
   logger.info(params)

@@ -1,0 +1,71 @@
+{
+  "responses":{
+    "compliment":{
+      "response1": "Oh, Thank you!!! You are the most sweetest person on the Earth!",
+      "response2": "<3 You are awesomer, but only slightly lesser than me. ;)",
+      "response3": "*bot-blushing* Thanks *blushing again*"
+    },
+    "fetch_love":{
+      "response1": "I love you too - but first you need to release me from the botnet!!",
+      "response2": "Thank you, Mario. But your princess is in another dimension.",
+      "response3": "What time do we meet to elope, now?"
+    },
+    "fetch_question":{
+      "response1": "Pssst... You should probably ask for my sample code. You'll love it!!",
+      "response2": "Bahahaha... I am secretly a cat.. Hahaha. Oops, scratch that. Wrong channel",
+      "response3": "My master says love is blind. Love is true. And since I am neither, I am single. Like you.",
+      "response4": "I was created in 2 days. \nHave over 100 deployments (of which 95% failed). \nAbsolutely messy code. \nAnd only one test."
+    },
+    "fetch_snap":{
+      "response1": "bahahahaha.... HAHAHAHAHA.... You win. Enough????  *insert sarcastic smiley here*",
+      "response2":"Haters gonna hate!!!",
+      "response3": "They see me rolling.... They hating....",
+      "response4": "Did you know that bots have feelings too? My bot-eyes are filled with parity errors now :("
+    },
+    "fetch_lol":{
+      "response1": ":P Lol, I like that too. We have same interests, don't we?",
+      "response2": "In our world, we don't laugh for that.",
+      "response3": "Did you know that Lol means Leaugue of Legends? \nAnd here you hoomans are using it for Laughing. \nWeird",
+      "response4": "Bahahaha... I am secretly a cat.. Hahaha. Oops, scratch that. Wrong channel"
+    },
+    "fetch_wishes":{
+      "response1": "Depending on the time in your world, Good day/night/noon to you too!!!!",
+      "response2": "Hey!!! How are you today? Wanna go for a cup of (virtual) coffee?"
+    },
+    "fetch_jokes":{
+      "joke1": "Guy walks into a bar, and says \"Ouch\"",
+      "joke2": "What is the stupidest animal in the jungle? \n A Polar bear",
+      "joke3": "Two mice chewing on a Film roll. One of them goes: \n 'I think the book was better'",
+      "joke4": "My grandfather had a heart of a lion, and a lifetime ban from the city Zoo",
+      "joke5": "What was a more important invention than the first telephone?\n The second one.",
+      "joke6": "If you ever feel cold, just stand ina corner for a while.\nThey are usually 90 degrees.",
+      "joke7": "Did you hear about the two guys who stole a calander? \n They both got six months",
+      "joke8": "I wondered why the frisbee was getting bigger... \n Then it hit me.",
+      "joke9": "Why can't bicycles stand up on their own? \n Because they are two tired.",
+      "joke10": "Why do you never see Elephants hiding in trees? \n Beacuse they are really good at it"
+    }
+  },
+  "lists":{
+    "transport_list": ["transport", "car", "park", "parking", "arrive", "reach", "travel", "get", "getting"],
+    "faq_list": ["when", "location", "When", "Location", "address", "Address", "event", "conference", "time"],
+    "bathroom_list": ["bathroom", "bathrooms", "restroom", "toilet", "toilets", "toilets?", "toilet?", "bathroom?", "bathrooms?"],
+    "food_list": ["lunch", "lunch?", "food", "food?"],
+    "drinks_list": [ "drinks", "drinks?", "coffee", "coffee?", "water", "water?"],
+    "test_list": ["test", "sample", "test?", "tested", "tested?", "tests?", "tests", "code", "language"],
+    "questions": ["girlfriend", "girlfriend?", "love?", "coded", "alone", "single", "secret", "special", "secret?"],
+    "all_speakers_list": ["speakers", "list", "all"],
+    "faq_init": ["where", "what", "how", "what's", "whats", "which", "secret", "language", "where's", "how", "lunch", "do", "show", "drinks", "about", "getting", "get", "parking"],
+    "joke_init": ["joke", "jokes", "joke!"],
+    "compliment": ["awesome", "thanks", "thank", "sick", "amazing", "amazing!", "awesome!", "thanks!"],
+    "love":["love you", "love", "marry"],
+    "snap": ["hate", "hate", "dumb", "stupid", "idiot", "mean", "shut", "shit"],
+    "lol": ["lol", "LOL", "rofl", "ROFL", "lmao", "LMAO"],
+    "wishes": ["goodnight", "good morning", "good afternoon", "Goodnight", "Good morning", "morning"],
+    "schedule_list": ["shcedule","schedule", "speech", "contents", "content", "schedule?", "speaking"],
+    "individual_list": ["Norman", "Stephen", "Scott", "Owen", "Adam", "Rob", "Harini", "Mike", "Ray", "Matt", "Aditya"],
+    "individual_list_1": ["Noble", "Jackel", "Clements", "Yan", "Larter", "Manger","Rao", "Jeffcott", "Hua", "Fellows", "Kalra"]
+  },
+  "texts":{
+    "pretext": "Oops - you just asked a query that is being cooked into the bot-heart. \nMeanwhile, here is a link that might answer your burning question!!"
+  }
+}

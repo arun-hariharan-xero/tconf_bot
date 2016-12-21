@@ -1,28 +1,19 @@
 require_relative '../Response/responses'
-require_relative '../Dictionaries/keywords_list'
-require_relative '../Process/fetchers'
+require_relative '../Processors/fetchers'
 
 class BotBrains
 
   attr_reader :response, :keywords, :names, :speech, :individual_speech, :individual_image
-  attr_reader :fetcher
+  
 
-  def initialize 
+  def initialize(keywords)
     @response = Responses.new
-    @keywords = Keywords.new
-    @fetcher = Fetchers.new(keywords)
-  end
-
-  def begin_individual_response(message)
-    process_schedule_data
-    full_name = fetcher.fetch_ind_data(message)
-    final_data = fetcher.fetch_detailed_speaker_info(full_name)
-    response.respond_message(final_data[0..1], "https://tconf.io", "", final_data[2])
+    @keywords = keywords
   end
 
   def bingo(message)
     answer = get_answer_from_bing(message)
-    pretext = "Oops - you just asked a query that is being cooked into the bot-heart. \nMeanwhile, here is a link that might answer your burning question!!"
+    pretext = keywords["texts"].values[0]
     response.respond_message(answer[0], answer[1], pretext)
   end
 

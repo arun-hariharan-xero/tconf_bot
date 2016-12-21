@@ -28,11 +28,11 @@ class Fetchers
   def fetch_ind_data(message)
     full_name = ""
     message.split(' ').each_with_index do |msg, ind|
-      if (keywords.individual_list_1.include? msg.capitalize) 
-        new_ind = keywords.individual_list_1.index(msg)
+      if (keywords['lists']['individual_list_1'].include? msg.capitalize) 
+        new_ind = keywords['lists']['individual_list_1'].index(msg)
         full_name = brains.names[new_ind]
-      elsif (keywords.individual_list.include? msg.capitalize) 
-        new_ind = keywords.individual_list.index(msg)
+      elsif (keywords['lists']['individual_list'].include? msg.capitalize) 
+        new_ind = keywords['lists']['individual_list'].index(msg)
         full_name = brains.names[new_ind]
       end
     end
@@ -41,14 +41,14 @@ class Fetchers
 
   def fetch_detailed_speaker_info(full_name)
     full_speaker_data = []
-    keywords.individual_speech.each do |key, value|
+    brains.individual_speech.each do |key, value|
       if key == full_name
         full_speaker_data << key
         full_speaker_data << value
       end
     end
 
-    keywords.individual_image.each do |key, value|
+    brains.individual_image.each do |key, value|
       if key == full_name
         full_speaker_data << value
       end

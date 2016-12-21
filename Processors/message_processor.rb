@@ -10,7 +10,7 @@ class MessageProcessor
     @response = Responses.new
     @keywords = keywords
     @brains = brains
-    @request = RequestProcessor.new(brains)
+    @request = RequestProcessor.new(keywords, brains, response)
     @fetcher = Fetchers.new(keywords, brains)
   end
 
@@ -43,20 +43,20 @@ class MessageProcessor
       request.begin_individual_response(message)
 
     elsif (message.split(' ') & keywords['lists']['schedule_list']).any?
-      brains.process_schedule_data
+      brains.process_schedules
       response.respond_message(["The Schedule for the day:", brains.final_schedule.join("\n")])  
 
     else
-      brains.bingo(message)
+      request.bingo(message)
     end
   end
 
   def respond_with_correct_faq(message)
     answer = fetcher.fetch_faq_answer(message)
     if answer == "speaker"
-      brains.begin_individual_response(message)
+      request.begin_individual_response(message)
     elsif answer == []
-       brains.bingo(message)
+       request.bingo(message)
     elsif answer == "test"
       keywords["responses"]["fetch_code"].values.sample
     elsif answer == "question"

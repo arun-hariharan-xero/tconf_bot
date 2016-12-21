@@ -6,7 +6,7 @@ require_relative '../Response/responses'
 require_relative '../Processors/fetchers'
 require_relative '../Dictionaries/keywords_list'
 
-describe 'Fetchers' do 
+describe 'RequestProcessor' do 
   before do 
     keywords_json = File.read(File.expand_path("./Dictionaries/keywords_prebuilt.json"))
     @keywords = JSON.parse(keywords_json)
@@ -14,10 +14,11 @@ describe 'Fetchers' do
 
   context '#fetch_love' do 
     let(:brains) { BotBrains.new(@keywords) }
-    let(:msg_proc) { MessageProcessor.new(@keywords, brains) }
+    let(:response) { Responses.new }
+    let(:request) { RequestProcessor.new(@keywords, brains, response) }
 
     it 'processes the msessage correctly' do 
-      msg_proc.process("what is Norman speaking")
+      request.bingo("one plus one")
     end
   end
 end

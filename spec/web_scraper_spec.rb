@@ -48,7 +48,7 @@ describe 'Fetchers' do
       fetch.fetch_jokes
     end
     it 'returns faq answer' do 
-      fetch.fetch_faq_answer('bathroom')
+      puts fetch.fetch_faq_answer('transport')
     end
   end
 end

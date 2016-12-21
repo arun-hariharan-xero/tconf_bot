@@ -58,10 +58,7 @@ class MessageProcessor
     elsif answer == []
        brains.bingo(message)
     elsif answer == "test"
-      code1 = "My only test case - Guess the language ;) \n```describe '#please_run_i_beg_you' do \n\tcontext 'when bot is running' do\n\t\tit { is_expected.to be_running }\n\tend\nend```"
-      code2 = "I *swear* this is in my code. \nI guess *my master* likes to just *watch the world burn*!!\n```elsif answer == \"question\"\n\trespond_answer(question)\nend```"
-      code = [code1, code2]
-      response.respond_normal(code.sample)
+      keywords["responses"]["fetch_code"].values.sample
     elsif answer == "question"
       response.respond_normal(fetcher.fetch_question)
     elsif answer == "bathroom"

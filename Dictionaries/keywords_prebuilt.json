@@ -43,6 +43,10 @@
       "joke8": "I wondered why the frisbee was getting bigger... \n Then it hit me.",
       "joke9": "Why can't bicycles stand up on their own? \n Because they are two tired.",
       "joke10": "Why do you never see Elephants hiding in trees? \n Beacuse they are really good at it"
+    },
+    "fetch_code":{
+      "code1": "My only test case - Guess the language ;) \n```describe '#please_run_i_beg_you' do \n\tcontext 'when bot is running' do\n\t\tit { is_expected.to be_running }\n\tend\nend```",
+      "code2":"I *swear* this is in my code. \nI guess *my master* likes to just *watch the world burn*!!\n```elsif answer == \"question\"\n\trespond_answer(question)\nend```"
     }
   },
   "lists":{

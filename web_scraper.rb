@@ -22,9 +22,10 @@ post '/gateway' do
   #Pry.start(binding)  
 end
 
-# keywords = Keywords.new
-# brains = BotBrains.new
-# process_message = ProcessMessage.new(keywords, brains)
+  # keywords_json = File.read(File.expand_path("./Dictionaries/keywords_prebuilt.json"))
+  # keywords = JSON.parse(keywords_json)
+  # brains = BotBrains.new(keywords)
+  # process_message = MessageProcessor.new(keywords, brains)
 
-# message = "I love you"
-# process_message.process(message)
+  # message = "I love you"
+  # process_message.process(message)

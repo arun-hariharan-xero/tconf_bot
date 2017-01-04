@@ -4,7 +4,6 @@ require_relative "../Processors/fetchers"
 require_relative "../Processors/message_processor"
 require_relative '../Response/responses'
 require_relative '../Processors/fetchers'
-require_relative '../Dictionaries/keywords_list'
 
 describe 'MessageProcessor' do 
   before do 

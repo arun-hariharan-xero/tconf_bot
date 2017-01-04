@@ -24,4 +24,5 @@ class Responses
    def respond_normal message    
     {:text => message}.to_json
   end
+  
 end

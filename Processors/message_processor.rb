@@ -15,57 +15,81 @@ class MessageProcessor
   end
 
   def process(message)
-    if (message.split(' ') & keywords['lists']['all_speakers_list']).any?
+    matching =  message.split(' ') & keywords['lists'].values.flatten
+
+    key1 = keywords['lists'].select do |key, values|
+      key if (matching & values).any?
+    end
+
+    (key1.empty?) ? match_tertiary_cases(message, "Unknown") : match_primary_cases(message, key1.first[0])
+  end
+
+  private
+
+  def match_primary_cases(message, key)
+    case key
+    when "all_speakers_list"      
       response.respond_message(brains.get_speaker_hash)
-
-    elsif (message.split(' ') & keywords['lists']['faq_init']).any?
-      respond_with_correct_faq(message)
-
-    elsif (message.split(' ') & keywords['lists']['joke_init']).any?
-      response.respond_message(fetcher.fetch_jokes)
-
-    elsif (message.split(' ') & keywords['lists']['compliment']).any? 
-      response.respond_normal(fetcher.fetch_compliment)
-
-    elsif (message.split(' ') & keywords['lists']['love']).any?
-      response.respond_normal(fetcher.fetch_love)
-
-    elsif (message.split(' ') & keywords['lists']['snap']).any?
-      response.respond_normal(fetcher.fetch_snap)
-
-    elsif (message.split(' ') & keywords['lists']['lol']).any?
-      response.respond_normal(fetcher.fetch_lol)
-
-    elsif (message.split(' ') & keywords['lists']['wishes']).any?
-      response.respond_normal(fetcher.fetch_wishes)
-
-    elsif (message.split(' ') & keywords['lists']['individual_list_1']).any? || (message.split(' ') & keywords['lists']['individual_list']).any?
+    when "individual_list_1"
       request.begin_individual_response(message)
-
-    elsif (message.split(' ') & keywords['lists']['schedule_list']).any?
-      brains.process_schedules
-      response.respond_message(["The Schedule for the day:", brains.final_schedule.join("\n")])  
-
+    when "individual_list"
+      request.begin_individual_response(message)
+    when "schedule_list" 
+      handle_schedule
     else
-      request.bingo(message)
+      match_secondary_cases(message, key)
+    end
+  end
+
+  def match_secondary_cases(message, key)
+    case key
+    when "joke_init" 
+      response.respond_message(fetcher.fetch_jokes)
+    when "compliment" 
+      response.respond_normal(fetcher.fetch_compliment)
+    when "wishes"
+      response.respond_normal(fetcher.fetch_wishes)
+    else
+      match_tertiary_cases(message, key)
+    end
+  end
+
+  def match_tertiary_cases(message, key)
+    case key
+    when "love" 
+      response.respond_normal(fetcher.fetch_love)
+    when "snap" 
+      response.respond_normal(fetcher.fetch_snap)
+    when "lol"
+      response.respond_normal(fetcher.fetch_lol)
+    else
+      respond_with_correct_faq(message)
     end
   end
 
   def respond_with_correct_faq(message)
     answer = fetcher.fetch_faq_answer(message)
-    if answer == "speaker"
+
+    case answer
+    when 'speaker'
       request.begin_individual_response(message)
-    elsif answer == []
+    when []
        request.bingo(message)
-    elsif answer == "test"
+    when 'test'
       keywords["responses"]["fetch_code"].values.sample
-    elsif answer == "question"
+    when 'question'
       response.respond_normal(fetcher.fetch_question)
-    elsif answer == "bathroom"
+    when 'bathroom'
       response.respond_bathroom
     else
       response.respond_message(answer)
     end
   end
+
+  def handle_schedule
+    brains.process_schedules
+    response.respond_message(["The Schedule for the day:", brains.final_schedule.join("\n")]) 
+  end
+
 
 end

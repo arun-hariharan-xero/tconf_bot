@@ -4,7 +4,7 @@ require_relative '../Processors/fetchers'
 class BotBrains
 
   attr_reader :response, :keywords, :names, :speech, :individual_speech, :individual_image
-  attr_reader :speaker_string
+  attr_reader :speaker_string, :final_schedule
   
 
   def initialize(keywords)

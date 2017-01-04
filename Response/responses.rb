@@ -2,7 +2,7 @@ class Responses
   
   def initialize; end
 
-  def respond_message(message, t_link = false, pret = false, t_url = false)  
+  def respond_message(message, t_link = false, pret = false, t_url = false)
     t_link ||= "https://tconf.io"
     t_url ||= "https://tconf.io/assets/img/backgrounds/bg1.jpg"
     pret ||= ""

@@ -38,7 +38,7 @@ class Fetchers
     end
     full_name
   end
-
+  
   def fetch_detailed_speaker_info(full_name)
     full_speaker_data = []
     brains.individual_speech.each do |key, value|

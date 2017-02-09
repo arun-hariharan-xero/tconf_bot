@@ -28,7 +28,7 @@ class MessageProcessor
 
   def match_primary_cases(message, key)
     case key
-    when "all_speakers_list"      
+    when "all_speakers_list"
       response.respond_message(brains.get_speaker_hash)
     when "individual_list_1"
       request.begin_individual_response(message)

@@ -1,9 +1,6 @@
-require_relative "../web_scraper"
 require_relative "../Scraper/bot_brains"
-require_relative "../Processors/fetchers"
 require_relative "../Processors/message_processor"
 require_relative '../Response/responses'
-require_relative '../Processors/fetchers'
 
 describe 'MessageProcessor' do 
   before do 
@@ -12,6 +9,7 @@ describe 'MessageProcessor' do
   end 
 
   let(:brains) { BotBrains.new(@keywords) }
+  let(:response) { Responses.new }
   let(:msg_proc) { MessageProcessor.new(@keywords, brains) }
 
   context '#initialize' do
@@ -142,7 +140,16 @@ describe 'MessageProcessor' do
         expect(msg_proc).to receive(:respond_with_correct_faq).with(question_list[:question_exluded])
         msg_proc.process(question_list[:question_exluded])
       end
-    end    
+
+      # I don't particularly enjoy this test - as it is testing the implementation rather than 
+      # the behaviour, but this exists anyway and could be extended if I go for Code coverage 
+      # in future. 
+      it 'should call get speaker hash method from brains' do         
+        expect(brains).to receive(:get_speaker_hash)
+        allow(brains).to receive(:get_speaker_hash) { ["some Test", "test string"] }
+        msg_proc.process(question_list[:speakers])
+      end 
+    end
   end
 
   context 'local_testing' do

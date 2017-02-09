@@ -1,10 +1,6 @@
-require_relative "../web_scraper"
 require_relative "../Scraper/bot_brains"
-require_relative "../Processors/fetchers"
-require_relative "../Processors/message_processor"
 require_relative '../Response/responses'
-require_relative '../Processors/fetchers'
-require_relative '../Dictionaries/keywords_list'
+
 
 describe 'RequestProcessor' do 
   before do 

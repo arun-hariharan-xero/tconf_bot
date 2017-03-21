@@ -22,6 +22,10 @@ post '/gateway' do
   #Pry.start(binding)  
 end
 
+get '/' do
+  "Hello World!!!"
+end
+
   # keywords_json = File.read(File.expand_path("./Dictionaries/keywords_prebuilt.json"))
   # keywords = JSON.parse(keywords_json)
   # brains = BotBrains.new(keywords)
